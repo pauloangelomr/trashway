@@ -4,7 +4,7 @@ import {Link as RouterLink} from "react-router-dom";
 import RecyclingIcon from "@mui/icons-material/Recycling";
 import * as colors from "@mui/material/colors";
 import styled from "@emotion/styled";
-import Header from "@components/Header";
+import {Header} from "@components/Header";
 
 const PRODUCTS = [
   {
