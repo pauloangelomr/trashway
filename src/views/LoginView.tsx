@@ -1,3 +1,4 @@
+import {useNavigate} from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
@@ -5,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import PasswordInput from "@components/PasswordInput";
 import {BaseHeader} from "@components/Header";
-import {useNavigate} from "react-router-dom";
+import Link from "@components/Link";
 
 export default function LoginView() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function LoginView() {
             variant="contained"
           >Entrar
           </Button>
+          <Link to="/cadastro">Quero me cadastrar</Link>
         </Paper>
       </Container>
     </>
