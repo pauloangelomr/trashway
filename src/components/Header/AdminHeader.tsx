@@ -5,26 +5,29 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import Link from "@components/Link";
+import {createSxStyles} from "@helpers/createSxStyles";
 import BaseHeader from "./BaseHeader";
 
-const LINKS = [
+export const CUSTOMER_MENU_OPTIONS = [
   {
-    href: "/sobre",
-    label: "Quem Somos"
+    id: "dashboard",
+    label: "Dashboard"
   },
   {
-    href: "/solicitar-coleta",
-    label: "Como Solicitar sua Coleta"
+    id: "profile",
+    label: "Perfil"
   },
   {
-    href: "/seja-parceiro",
-    label: "Seja uma empresa parceira"
-  },
-
+    id: "logout",
+    label: "Sair"
+  }
 ];
 
-export default function Header() {
+export const PROVIDER_MENU_OPTIONS = [
+  ...CUSTOMER_MENU_OPTIONS
+];
+
+export default function AdminHeader() {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -35,13 +38,13 @@ export default function Header() {
     setAnchorElNav(null);
   };
 
-  const handleOpenLink = () => {
+  const handleOption = (optionId: string) => {
     // todo: add code
   };
 
   return (
     <BaseHeader>
-      <Box sx={{display: {xs: "flex", md: "none"}}}>
+      <Box sx={menuContainerStyles}>
         <IconButton
           size="large"
           edge="start"
@@ -64,30 +67,24 @@ export default function Header() {
           }}
           open={Boolean(anchorElNav)}
           onClose={handleCloseNavMenu}
-          sx={{
-            display: {xs: "block", md: "none"}
-          }}
+          sx={menuStyles}
         >
-          {LINKS.map((link, i) => (
-            <MenuItem key={String(i + 1)} onClick={handleOpenLink}>
+          {CUSTOMER_MENU_OPTIONS.map((option, i) => (
+            <MenuItem key={String(i + 1)} onClick={() => handleOption(option.id)}>
               <Typography >
-                {link.label}
+                {option.label}
               </Typography>
             </MenuItem>
         ))}
         </Menu>
       </Box>
-      <Box sx={{display: {xs: "none", md: "flex"}}}>
-        {LINKS.map(link => (
-          <Link
-            key={link.href}
-            sx={{mx: {xs: 0, md: 2}}}
-            to={link.href}
-          >
-            {link.label}
-          </Link>
-          ))}
-      </Box>
+      <Typography sx={userNameStyles}>Olá seu cuca</Typography>
     </BaseHeader>
   );
 }
+
+const menuContainerStyles = createSxStyles({display: {xs: "flex", md: "none"}});
+
+const menuStyles = createSxStyles({display: {xs: "block", md: "none"}});
+
+const userNameStyles = createSxStyles({display: {xs: "none", md: "flex"}});

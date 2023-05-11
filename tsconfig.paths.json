@@ -5,6 +5,8 @@
       "@views/*": ["./views/*"],
       "@assets/*": ["./assets/*"],
       "@components/*": ["./components/*"],
+      "@helpers/*": ["./helpers/*"],
+      "@interfaces/*": ["./interfaces/*"],
     }
   }
 }
