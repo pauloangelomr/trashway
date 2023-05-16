@@ -7,6 +7,9 @@
       "@components/*": ["./components/*"],
       "@helpers/*": ["./helpers/*"],
       "@interfaces/*": ["./interfaces/*"],
+      "@config/*": ["./config/*"],
+      "@store/*": ["./store/*"],
+      "@hooks/*": ["./hooks/*"],
     }
   }
 }

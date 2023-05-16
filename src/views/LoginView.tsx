@@ -1,3 +1,4 @@
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -7,13 +8,23 @@ import Container from "@mui/material/Container";
 import PasswordInput from "@components/PasswordInput";
 import {BaseHeader} from "@components/Header";
 import Link from "@components/Link";
+import {useAppDispatch} from "@hooks/useAppDispatch";
+import {useAppSelector} from "@hooks/useAppSelector";
+import {login} from "@store/user/userSlice";
+import {selectUser} from "@store/user/userSelectors";
 
 export default function LoginView() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const {user} = useAppSelector(selectUser);
 
   const handlePressLogin = () => {
-    navigate("/admin");
+    dispatch(login({user: {name: "Johnsons"}}));
   };
+
+  useEffect(() => {
+    if (user) navigate("/admin");
+  }, [user, navigate]);
 
   return (
     <>

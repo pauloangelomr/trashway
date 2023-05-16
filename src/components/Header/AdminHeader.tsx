@@ -7,6 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import {createSxStyles} from "@helpers/createSxStyles";
 import BaseHeader from "./BaseHeader";
+import {useAppSelector} from "@hooks/useAppSelector";
+import {selectUser} from "@store/user/userSelectors";
 
 export const CUSTOMER_MENU_OPTIONS = [
   {
@@ -29,6 +31,7 @@ export const PROVIDER_MENU_OPTIONS = [
 
 export default function AdminHeader() {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
+const {user} = useAppSelector(selectUser);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -78,7 +81,7 @@ export default function AdminHeader() {
         ))}
         </Menu>
       </Box>
-      <Typography sx={userNameStyles}>Olá seu cuca</Typography>
+      <Typography sx={userNameStyles}>{`Olá, ${user!.name}`}</Typography>
     </BaseHeader>
   );
 }
