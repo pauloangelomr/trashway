@@ -27,7 +27,13 @@ export default function RegisterView() {
           {tabIndex === 0 && (
             <>
               <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <TextField label="Nome"/>
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
                 <TextField label="Email"/>
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <TextField label="Celular"/>
               </FormControl>
               <FormControl fullWidth sx={{my: 1}} variant="outlined">
                 <PasswordInput id="senha" label="Senha" />
@@ -39,7 +45,21 @@ export default function RegisterView() {
           )}
           {tabIndex === 1 && (
             <>
-
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <TextField label="Nome"/>
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <TextField label="Email"/>
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <TextField label="Celular"/>
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <PasswordInput id="senha" label="Senha" />
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <PasswordInput label="Confirmar senha" id="confirmar-senha" />
+              </FormControl>
             </>
           )}
           <Button size="large" fullWidth sx={{my: 2}}

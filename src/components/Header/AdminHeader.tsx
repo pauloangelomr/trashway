@@ -1,4 +1,5 @@
-import {useState} from "react";
+import {useState, useMemo} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -9,6 +10,8 @@ import {createSxStyles} from "@helpers/createSxStyles";
 import BaseHeader from "./BaseHeader";
 import {useAppSelector} from "@hooks/useAppSelector";
 import {selectUser} from "@store/user/userSelectors";
+import {useAppDispatch} from "@hooks/useAppDispatch";
+import {logout} from "@store/user/userSlice";
 
 export const CUSTOMER_MENU_OPTIONS = [
   {
@@ -16,7 +19,7 @@ export const CUSTOMER_MENU_OPTIONS = [
     label: "Dashboard"
   },
   {
-    id: "profile",
+    id: "perfil",
     label: "Perfil"
   },
   {
@@ -31,7 +34,14 @@ export const PROVIDER_MENU_OPTIONS = [
 
 export default function AdminHeader() {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
-const {user} = useAppSelector(selectUser);
+  const {user} = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
+
+  const pathName = useMemo(() => {
+    return pathname.substring(pathname.lastIndexOf("/") + 1);
+  }, [pathname]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -42,7 +52,15 @@ const {user} = useAppSelector(selectUser);
   };
 
   const handleOption = (optionId: string) => {
-    // todo: add code
+    if (optionId === "dashboard") {
+      navigate("/admin/dashboard");
+    }
+    if (optionId === "perfil") {
+      navigate("/admin/perfil");
+    }
+    if (optionId === "logout") {
+      dispatch(logout());
+    }
   };
 
   return (
@@ -73,8 +91,8 @@ const {user} = useAppSelector(selectUser);
           sx={menuStyles}
         >
           {CUSTOMER_MENU_OPTIONS.map((option, i) => (
-            <MenuItem key={String(i + 1)} onClick={() => handleOption(option.id)}>
-              <Typography >
+            <MenuItem key={String(i + 1)} onClick={() => handleOption(option.id)} selected={option.id === pathName}>
+              <Typography>
                 {option.label}
               </Typography>
             </MenuItem>

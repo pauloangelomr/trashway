@@ -14,7 +14,7 @@ import {getOrdersByUserId} from "@store/order/orderSlice";
 import {selectUser} from "@store/user/userSelectors";
 import {selectOrder} from "@store/order/orderSelectors";
 
-export default function AdminView(){
+export default function AdminDashboardView(){
   const dispatch = useAppDispatch();
   const {user} = useAppSelector(selectUser);
   const {orders, isLoading, hasError} = useAppSelector(selectOrder);

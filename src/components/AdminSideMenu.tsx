@@ -1,3 +1,5 @@
+import {useMemo} from "react";
+import {useNavigate, useLocation} from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,8 +11,20 @@ import {logout} from "@store/user/userSlice";
 
 export default function AdminSideMenu() {
   const dispatch = useAppDispatch();
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
+
+  const pathName = useMemo(() => {
+    return pathname.substring(pathname.lastIndexOf("/") + 1);
+  }, [pathname]);
 
   const handlePressOption = (optionId: string) => {
+    if (optionId === "dashboard") {
+      navigate("/admin/dashboard");
+    }
+    if (optionId === "perfil") {
+      navigate("/admin/perfil");
+    }
     if (optionId === "logout") {
       dispatch(logout());
     }
@@ -22,7 +36,7 @@ export default function AdminSideMenu() {
         <List>
           {CUSTOMER_MENU_OPTIONS.map(option => (
             <ListItem key={option.id}>
-              <ListItemButton onClick={() => handlePressOption(option.id)}>
+              <ListItemButton selected={pathName === option.id} onClick={() => handlePressOption(option.id)}>
                 <ListItemText primary={option.label} />
               </ListItemButton>
             </ListItem>
