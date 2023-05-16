@@ -14,11 +14,11 @@ const LINKS = [
     label: "Quem Somos"
   },
   {
-    href: "/solicitar-coleta",
+    href: "/admin/dashboard?action=order", // todo: add create order query
     label: "Como Solicitar sua Coleta"
   },
   {
-    href: "/seja-parceiro",
+    href: "/cadastro?role=partner",
     label: "Seja uma empresa parceira"
   },
 

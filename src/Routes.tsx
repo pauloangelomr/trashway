@@ -3,9 +3,9 @@ import HomeView from "@views/HomeView";
 import LoginView from "@views/LoginView";
 import RegisterView from "@views/RegisterView";
 import PasswordRecoverView from "@views/PasswordRecoverView";
-import AdminDashboardView from "@views/AdminDashboardView";
+import AdminDashboardView from "@views/admin/AdminDashboardView";
 import ProtectedRoute from "@components/ProtectedRoute";
-import AdminProfileView from "@views/AdminProfileView";
+import AdminProfileView from "@views/admin/AdminProfileView";
 import AdminView from "@views/admin/AdminView";
 
 const router = createBrowserRouter([

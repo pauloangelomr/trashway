@@ -1,3 +1,4 @@
+import {useSearchParams} from "react-router-dom";
 import {useState, SyntheticEvent} from "react";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -11,7 +12,8 @@ import {BaseHeader} from "@components/Header";
 import Link from "@components/Link";
 
 export default function RegisterView() {
-  const [tabIndex, setTabIndex] = useState(0);
+  const [searchParams] = useSearchParams();
+  const [tabIndex, setTabIndex] = useState(searchParams.get("role") === "partner" ? 1 : 0);
 
   const handleChange = (_ev: SyntheticEvent, valueIndex: number) => setTabIndex(valueIndex);
 
