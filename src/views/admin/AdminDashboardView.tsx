@@ -54,7 +54,8 @@ export default function AdminDashboardView() {
                 fullWidth
                 sx={createOrderStyles}
                 onClick={handleShowRequestModal}
-              >Solicitar Coleta
+              >
+                Solicitar Coleta
               </Button>
             )}
             <Grid container rowSpacing={2} columnSpacing={{xs: 0, md: 2}}>

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, forwardRef} from "react";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -11,7 +11,7 @@ interface IProps {
   id: string;
 }
 
-export default function PasswordInput({label, id}: IProps) {
+const PasswordInput = forwardRef<HTMLInputElement, IProps>(({label, id, ...props}, ref) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const handleTriggerPassword = () =>
@@ -22,6 +22,7 @@ export default function PasswordInput({label, id}: IProps) {
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <OutlinedInput
         id={id}
+        ref={ref}
         type={isPasswordVisible ? "text" : "password"}
         endAdornment={(
           <InputAdornment position="end">
@@ -35,7 +36,11 @@ export default function PasswordInput({label, id}: IProps) {
           </InputAdornment>
         )}
         label={label}
+        {...props}
       />
     </>
   );
-}
+});
+PasswordInput.displayName = "PasswordInput";
+
+export default PasswordInput;

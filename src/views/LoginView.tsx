@@ -1,5 +1,8 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
@@ -13,18 +16,31 @@ import {useAppSelector} from "@hooks/useAppSelector";
 import {login} from "@store/user/userSlice";
 import {selectUser} from "@store/user/userSelectors";
 
+const loginFormSchema = z.object({
+  email: z.string()
+    .nonempty("O email é obrigatório")
+    .email(),
+  password: z.string()
+    .min(6, "A senha deve conter 6 caracteres")
+});
+
+type ILoginFormData = z.infer<typeof loginFormSchema>;
+
 export default function LoginView() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {user} = useAppSelector(selectUser);
-
-  const handlePressLogin = () => {
-    dispatch(login({user: {name: "Johnsons", email: "johnsons@johsons.com", id: 1, phone: "(14)99999-8888", cpf: "111.222.333.44"}}));
-  };
+  const {register, handleSubmit} = useForm<ILoginFormData>({
+    resolver: zodResolver(loginFormSchema),
+  });
 
   useEffect(() => {
     if (user) navigate("/admin");
   }, [user, navigate]);
+
+  const handleLogin = ({email, password}: ILoginFormData) => {
+    dispatch(login({email, password}));
+  };
 
   return (
     <>
@@ -32,15 +48,16 @@ export default function LoginView() {
       <Container sx={{py: 2}} maxWidth="sm">
         <Paper sx={{p: 2}}>
           <FormControl fullWidth sx={{my: 1}} variant="outlined">
-            <TextField label="Email"/>
+            <TextField id="email" label="Email" {...register("email")}/>
           </FormControl>
           <FormControl fullWidth sx={{my: 1}} variant="outlined">
-            <PasswordInput id="senha" label="Senha" />
+            <PasswordInput id="senha" label="Senha" {...register("password")} />
           </FormControl>
           <Button size="large" fullWidth sx={{my: 2}}
-            onClick={handlePressLogin}
+            onClick={handleSubmit(handleLogin)}
             variant="contained"
-          >Entrar
+          >
+            Entrar
           </Button>
           <Link to="/cadastro">Quero me cadastrar</Link>
         </Paper>
