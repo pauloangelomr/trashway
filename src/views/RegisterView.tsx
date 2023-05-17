@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import PasswordInput from "@components/PasswordInput";
+import PasswordInput from "@components/inputs/PasswordInput";
 import {BaseHeader} from "@components/Header";
 import Link from "@components/Link";
 
@@ -38,6 +38,9 @@ export default function RegisterView() {
                 <TextField label="Celular"/>
               </FormControl>
               <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <TextField label="CPF"/>
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
                 <PasswordInput id="senha" label="Senha" />
               </FormControl>
               <FormControl fullWidth sx={{my: 1}} variant="outlined">
@@ -55,6 +58,9 @@ export default function RegisterView() {
               </FormControl>
               <FormControl fullWidth sx={{my: 1}} variant="outlined">
                 <TextField label="Celular"/>
+              </FormControl>
+              <FormControl fullWidth sx={{my: 1}} variant="outlined">
+                <TextField label="CNPJ"/>
               </FormControl>
               <FormControl fullWidth sx={{my: 1}} variant="outlined">
                 <PasswordInput id="senha" label="Senha" />

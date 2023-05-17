@@ -1,9 +1,11 @@
 import {useEffect} from "react";
+import {useSearchParams, useNavigate, useLocation} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
+import Button from "@mui/material/Button";
 import {AdminHeader} from "@components/Header";
 import AdminSideMenu from "@components/AdminSideMenu";
 import TrashRequest from "@components/TrashRequest";
@@ -13,15 +15,29 @@ import {useAppDispatch} from "@hooks/useAppDispatch";
 import {getOrdersByUserId} from "@store/order/orderSlice";
 import {selectUser} from "@store/user/userSelectors";
 import {selectOrder} from "@store/order/orderSelectors";
+import AdminRequestOrderModal from "./AdminRequestOrderModal";
 
-export default function AdminDashboardView(){
+export default function AdminDashboardView() {
   const dispatch = useAppDispatch();
   const {user} = useAppSelector(selectUser);
   const {orders, isLoading, hasError} = useAppSelector(selectOrder);
+  const [searchParams] = useSearchParams();
+  const action = searchParams.get("action");
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getOrdersByUserId({userId: user!.id}));
   }, [dispatch, user]);
+
+  const handleShowRequestModal = () => {
+    navigate(`${pathname}?action=order`);
+  };
+
+  const handleCloseRequestModal = () => {
+    dispatch(getOrdersByUserId({userId: user!.id}));
+    navigate(pathname);
+  };
 
   return (
     <>
@@ -32,10 +48,21 @@ export default function AdminDashboardView(){
         </Box>
         <Card sx={contentStyles}>
           <CardContent>
+            {user!.cpf && (
+              <Button
+                variant="contained"
+                fullWidth
+                sx={createOrderStyles}
+                onClick={handleShowRequestModal}
+              >Solicitar Coleta
+              </Button>
+            )}
             <Grid container rowSpacing={2} columnSpacing={{xs: 0, md: 2}}>
               {isLoading &&
                 Array.from({length: 5}).map((_, i) => (
-                  <Grid key={String(i + 1)} item md={3}
+                  <Grid
+                    key={String(i + 1)}
+                    item md={3}
                     xs={12}
                   >
                     <Skeleton
@@ -47,7 +74,10 @@ export default function AdminDashboardView(){
                 ))}
 
               {!isLoading && orders.map((order) => (
-                <Grid key={String(order.id)} item md={3}
+                <Grid
+                  key={String(order.id)}
+                  item
+                  md={3}
                   xs={12}
                 >
                   <TrashRequest />
@@ -58,6 +88,7 @@ export default function AdminDashboardView(){
           </CardContent>
         </Card>
       </Box>
+      <AdminRequestOrderModal isVisible={action === "order"} onClose={handleCloseRequestModal} />
     </>
   );
 }
@@ -71,4 +102,8 @@ const containerStyles = createSxStyles({
 const contentStyles = createSxStyles({
   flex: 1,
   ml: {xs: 0, md: 2}
+});
+
+const createOrderStyles = createSxStyles({
+  mb: 2
 });

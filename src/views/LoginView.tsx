@@ -5,7 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
-import PasswordInput from "@components/PasswordInput";
+import PasswordInput from "@components/inputs/PasswordInput";
 import {BaseHeader} from "@components/Header";
 import Link from "@components/Link";
 import {useAppDispatch} from "@hooks/useAppDispatch";
@@ -19,7 +19,7 @@ export default function LoginView() {
   const {user} = useAppSelector(selectUser);
 
   const handlePressLogin = () => {
-    dispatch(login({user: {name: "Johnsons"}}));
+    dispatch(login({user: {name: "Johnsons", email: "johnsons@johsons.com", id: 1, phone: "(14)99999-8888", cpf: "111.222.333.44"}}));
   };
 
   useEffect(() => {
