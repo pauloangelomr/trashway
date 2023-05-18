@@ -1,7 +1,7 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomeView from "@views/HomeView";
 import LoginView from "@views/LoginView";
-import RegisterView from "@views/RegisterView";
+import RegisterView from "@views/register/RegisterView";
 import PasswordRecoverView from "@views/PasswordRecoverView";
 import AdminDashboardView from "@views/admin/AdminDashboardView";
 import ProtectedRoute from "@components/ProtectedRoute";
