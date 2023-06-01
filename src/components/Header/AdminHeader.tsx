@@ -28,9 +28,9 @@ export const CUSTOMER_MENU_OPTIONS = [
   }
 ];
 
-export const PROVIDER_MENU_OPTIONS = [
-  ...CUSTOMER_MENU_OPTIONS
-];
+// export const PROVIDER_MENU_OPTIONS = [
+//   ...CUSTOMER_MENU_OPTIONS
+// ];
 
 export default function AdminHeader() {
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);

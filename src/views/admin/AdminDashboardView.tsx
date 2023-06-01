@@ -20,7 +20,7 @@ import AdminRequestOrderModal from "./AdminRequestOrderModal";
 export default function AdminDashboardView() {
   const dispatch = useAppDispatch();
   const {user} = useAppSelector(selectUser);
-  const {orders, isLoading, hasError} = useAppSelector(selectOrder);
+  const {orders, isLoading} = useAppSelector(selectOrder);
   const [searchParams] = useSearchParams();
   const action = searchParams.get("action");
   const {pathname} = useLocation();

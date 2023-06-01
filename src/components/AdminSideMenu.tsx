@@ -5,7 +5,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
-import {CUSTOMER_MENU_OPTIONS, PROVIDER_MENU_OPTIONS} from "@components/Header/AdminHeader";
+import {CUSTOMER_MENU_OPTIONS} from "@components/Header/AdminHeader";
 import {useAppDispatch} from "@hooks/useAppDispatch";
 import {logout} from "@store/user/userSlice";
 

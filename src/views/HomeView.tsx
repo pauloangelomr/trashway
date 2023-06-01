@@ -1,10 +1,11 @@
+import {Link as RouterLink, useNavigate} from "react-router-dom";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import {Link as RouterLink} from "react-router-dom";
+import Button from "@mui/material/Button";
 import RecyclingIcon from "@mui/icons-material/Recycling";
 import * as colors from "@mui/material/colors";
 import styled from "@emotion/styled";
@@ -47,6 +48,11 @@ const LINKS = [
 ];
 
 export default function HomeView() {
+  const navigate = useNavigate();
+
+  const handleNavigateToDashboard = () => {
+    navigate("/admin/dashboard");
+  };
 
   return (
     <>
@@ -55,6 +61,9 @@ export default function HomeView() {
       <Container maxWidth="md">
         <Subtitle variant='h5'>A importância de criarmos um mundo melhor!</Subtitle>
         <Typography>&quot;Faça a diferença no planeta! Pratique a coleta seletiva de lixo em sua casa, escola ou trabalho. Separando o lixo reciclável do orgânico, você está ajudando a preservar o meio ambiente e a garantir um futuro sustentável para as próximas gerações. Vamos juntos cuidar do nosso planeta! Comece agora mesmo a separar seu lixo e contribua para um mundo melhor.&quot;</Typography>
+        <Box sx={ctaWrapperStyles}>
+          <Button variant="contained" size="large" onClick={handleNavigateToDashboard}>Solicite uma coleta</Button>
+        </Box>
         <Subtitle variant='h5'>Quais os tipos de materias que podem ser reciclados</Subtitle>
         <Grid container rowSpacing={{xs: 1, md: 2}} columnSpacing={{xs: 1, md: 2}}
           sx={productsStyles}
@@ -77,6 +86,12 @@ export default function HomeView() {
     </>
   );
 }
+
+const ctaWrapperStyles = createSxStyles({
+  display: "flex",
+  justifyContent: "center",
+  py: 2
+});
 
 const productsStyles = createSxStyles({
   px: {xs: 0, md: 2}

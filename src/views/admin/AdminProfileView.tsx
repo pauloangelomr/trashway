@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import {AdminHeader} from "@components/Header";
 import AdminSideMenu from "@components/AdminSideMenu";
 import {createSxStyles} from "@helpers/createSxStyles";
+import AdminProfileForm from "@views/admin/AdminProfileForm";
 
 export default function AdminProfileView(){
 
@@ -16,7 +17,7 @@ export default function AdminProfileView(){
         </Box>
         <Card sx={contentStyles}>
           <CardContent>
-
+            <AdminProfileForm onSubmit={(formData) => console.log(formData)}/>
           </CardContent>
         </Card>
       </Box>

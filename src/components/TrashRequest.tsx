@@ -17,7 +17,7 @@ export default function TrashRequest() {
         image={TrashPlaceholderImg}
       />
       <CardContent>
-        <Typography>Rua das decepções, n 23, Bairro do capeta</Typography>
+        <Typography>Rua da esperança, n 77, Palmital</Typography>
       </CardContent>
       <CardActions>
         <Button size="small" color="success" fullWidth
