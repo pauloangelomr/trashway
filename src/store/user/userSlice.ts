@@ -7,6 +7,7 @@ export interface IUserState {
   user?: IUser;
   hasError: boolean;
   isLogged: boolean;
+  token?: string;
 }
 
 export const initialState: IUserState = {
@@ -26,6 +27,7 @@ export const userSlice = createSlice({
     loginSuccess(state, {payload}: ILoginResponse) {
       state.isLoading = false;
       state.user = payload.user;
+      state.token = payload.token;
       state.isLogged = true;
     },
     loginFailure(state) {
@@ -38,7 +40,7 @@ export const userSlice = createSlice({
     logout(state) {
       state.user = undefined;
       state.isLogged = false;
-    }
+    },
   },
 });
 

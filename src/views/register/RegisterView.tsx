@@ -1,5 +1,5 @@
 import {useState, SyntheticEvent} from "react";
-import {useSearchParams} from "react-router-dom";
+import {useSearchParams, useNavigate} from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Tabs from "@mui/material/Tabs";
@@ -9,15 +9,22 @@ import Link from "@components/Link";
 import {IRegisterCustomerFormData, IRegisterPartnerFormData} from "@helpers/validators/registerValidator";
 import RegisterCustomerForm from "./RegisterCustomerForm";
 import RegisterPartnerForm from "./RegisterPartnerForm";
+import api from "@config/api";
 
 export default function RegisterView() {
   const [searchParams] = useSearchParams();
   const [tabIndex, setTabIndex] = useState(searchParams.get("role") === "partner" ? 1 : 0);
+  const navigate = useNavigate();
 
   const handleChange = (_ev: SyntheticEvent, valueIndex: number) => setTabIndex(valueIndex);
 
-  const handleRegister = ({confirmPassword, ...formData}: IRegisterCustomerFormData | IRegisterPartnerFormData) => {
-    console.log(formData);
+  const handleRegister = async ({confirmPassword, ...formData}: IRegisterCustomerFormData | IRegisterPartnerFormData) => {
+    try {
+      await api.post("/users", formData);
+      navigate("/login");
+    } catch(e) {
+      console.log(e);
+    }
   };
 
   return (

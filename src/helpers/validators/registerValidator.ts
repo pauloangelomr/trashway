@@ -1,7 +1,9 @@
 import {z} from "zod";
 
 const registerFormSchema = {
-  name: z.string()
+  firstName: z.string()
+    .nonempty("O Nome é obrigatório"),
+  lastName: z.string()
     .nonempty("O Nome é obrigatório"),
   email: z.string()
     .nonempty("O email é obrigatório")

@@ -24,7 +24,10 @@ export default function RegisterPartnerForm({onSubmit}: IProps) {
   return (
     <>
       <FormControl fullWidth sx={{my: 1}} variant="outlined">
-        <TextField label="Nome" {...register("name")} />
+        <TextField label="Nome" {...register("firstName")} />
+      </FormControl>
+      <FormControl fullWidth sx={{my: 1}} variant="outlined">
+        <TextField label="Sobrenome" {...register("lastName")} />
       </FormControl>
       <FormControl fullWidth sx={{my: 1}} variant="outlined">
         <TextField label="Email" {...register("email")} />

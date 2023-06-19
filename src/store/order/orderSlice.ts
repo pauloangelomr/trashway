@@ -17,21 +17,11 @@ export const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    getOrdersByUserId(state, _action: PayloadAction<{ userId: number }>) {
+    getOrders(state) {
       state.isLoading = false;
       state.hasError = false;
-      state.orders = [
-        {
-          detail: "Lixo do bem",
-          id: 1,
-          name: "Esse é um lixo mesmo",
-          photo: "",
-          type: 1,
-          weight: 200
-        }
-      ];
     },
-    getOrdersByUserIdSuccess(state, {payload}: PayloadAction<{ orders: IOrder[]}>) {
+    getOrdersSuccess(state, {payload}: PayloadAction<{ orders: IOrder[] }>) {
       state.orders = payload.orders;
       state.isLoading = false;
     }
@@ -39,8 +29,8 @@ export const orderSlice = createSlice({
 });
 
 export const {
- getOrdersByUserId,
- getOrdersByUserIdSuccess
+  getOrders,
+  getOrdersSuccess
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

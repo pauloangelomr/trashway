@@ -5,4 +5,5 @@ export interface IOrder {
   detail: string;
   photo: string;
   weight: number;
+  address: string;
 }

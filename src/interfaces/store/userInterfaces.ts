@@ -8,4 +8,4 @@ export interface IUserLogin {
 
 export type ILoginPayloadAction = PayloadAction<IUserLogin>
 
-export type ILoginResponse = PayloadAction<{user: IUser}>
+export type ILoginResponse = PayloadAction<{user: IUser; token: string }>

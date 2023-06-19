@@ -1,8 +1,10 @@
 import {z} from "zod";
 
 const profileFormSchema = {
-  name: z.string()
+  firstName: z.string()
     .nonempty("O Nome é obrigatório"),
+  lastName: z.string()
+    .nonempty("O Sobrenome é obrigatório"),
   email: z.string()
     .nonempty("O email é obrigatório")
     .email(),

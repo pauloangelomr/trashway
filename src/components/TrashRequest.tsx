@@ -6,8 +6,21 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TrashPlaceholderImg from "@assets/trashPlaceholder.png";
 import {createSxStyles} from "@helpers/createSxStyles";
+import {useAppSelector} from "@hooks/useAppSelector";
+import {selectUser} from "@store/user/userSelectors";
+import IconButton from "@mui/material/IconButton";
+import DelteteIcon from "@mui/icons-material/Delete";
+import {IOrder} from "@interfaces/orderInterface";
 
-export default function TrashRequest() {
+type IProps = {
+  order: IOrder;
+}
+
+export default function TrashRequest({order}: IProps) {
+  const {user} = useAppSelector(selectUser);
+
+  console.log(order);
+
   return (
     <Card sx={cardContainerStyles}>
       <CardMedia
@@ -16,14 +29,25 @@ export default function TrashRequest() {
         sx={cardMediaStyles}
         image={TrashPlaceholderImg}
       />
+      <IconButton color="error" sx={deleteIconButtonStyles} size="small">
+        <DelteteIcon />
+      </IconButton>
       <CardContent>
-        <Typography>Rua da esperança, n 77, Palmital</Typography>
+        <Typography>{order.address}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="success" fullWidth
-          variant="contained"
-        >Agendar coleta
-        </Button>
+        {user!.cpf && (
+          <Button size="small" fullWidth
+            variant="contained"
+          >Visualizar
+          </Button>
+        )}
+        {user!.cnpj && (
+          <Button size="small" color="success" fullWidth
+            variant="contained"
+          >Agendar coleta
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
@@ -31,10 +55,17 @@ export default function TrashRequest() {
 
 const cardContainerStyles = createSxStyles({
   maxWidth: {xs: "inherit", md: 300},
+  position: "relative"
 });
 
 const cardMediaStyles = createSxStyles({
   height: 200,
   objectFit: "contain",
   backgroundColor: "grey"
+});
+
+const deleteIconButtonStyles = createSxStyles({
+  position: "absolute",
+  top: 0,
+  right: 0
 });

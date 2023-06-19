@@ -99,7 +99,7 @@ export default function AdminHeader() {
         ))}
         </Menu>
       </Box>
-      <Typography sx={userNameStyles}>{`Olá, ${user!.name}`}</Typography>
+      <Typography sx={userNameStyles}>{`Olá, ${user!.firstName}`}</Typography>
     </BaseHeader>
   );
 }

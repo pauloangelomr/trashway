@@ -12,7 +12,7 @@ import TrashRequest from "@components/TrashRequest";
 import {createSxStyles} from "@helpers/createSxStyles";
 import {useAppSelector} from "@hooks/useAppSelector";
 import {useAppDispatch} from "@hooks/useAppDispatch";
-import {getOrdersByUserId} from "@store/order/orderSlice";
+import {getOrders} from "@store/order/orderSlice";
 import {selectUser} from "@store/user/userSelectors";
 import {selectOrder} from "@store/order/orderSelectors";
 import AdminRequestOrderModal from "./AdminRequestOrderModal";
@@ -27,7 +27,8 @@ export default function AdminDashboardView() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getOrdersByUserId({userId: user!.id}));
+    console.log(user);
+    dispatch(getOrders());
   }, [dispatch, user]);
 
   const handleShowRequestModal = () => {
@@ -35,7 +36,7 @@ export default function AdminDashboardView() {
   };
 
   const handleCloseRequestModal = () => {
-    dispatch(getOrdersByUserId({userId: user!.id}));
+    dispatch(getOrders());
     navigate(pathname);
   };
 
@@ -74,16 +75,27 @@ export default function AdminDashboardView() {
                   </Grid>
                 ))}
 
-              {!isLoading && orders.map((order) => (
+              {!isLoading && user!.cpf && user!.orders.map((order) => (
                 <Grid
                   key={String(order.id)}
                   item
                   md={3}
                   xs={12}
                 >
-                  <TrashRequest />
+                  <TrashRequest order={order} />
                 </Grid>
-            ))}
+              ))}
+
+              {!isLoading && user!.cnpj && orders.map((order) => (
+                <Grid
+                  key={String(order.id)}
+                  item
+                  md={3}
+                  xs={12}
+                >
+                  <TrashRequest order={order} />
+                </Grid>
+              ))}
 
             </Grid>
           </CardContent>

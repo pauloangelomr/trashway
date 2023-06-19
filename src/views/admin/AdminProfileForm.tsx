@@ -17,7 +17,8 @@ export default function RegisterCustomerForm({onSubmit}: IProps) {
   const {register, handleSubmit} = useForm<IProfileCustomerFormData>({
     resolver: zodResolver(profileCustomerFormSchema),
     defaultValues: {
-      name: user?.name,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
       email: user?.email,
       phone: user?.phone,
       cpf: user?.cpf
@@ -31,16 +32,16 @@ export default function RegisterCustomerForm({onSubmit}: IProps) {
   return (
     <>
       <FormControl fullWidth sx={{my: 1}} variant="outlined">
-        <TextField label="Nome" {...register("name")} />
+        <TextField label="Nome" {...register("firstName")} />
+      </FormControl>
+      <FormControl fullWidth sx={{my: 1}} variant="outlined">
+        <TextField label="Nome" {...register("lastName")} />
       </FormControl>
       <FormControl fullWidth sx={{my: 1}} variant="outlined">
         <TextField label="Email" {...register("email")} disabled />
       </FormControl>
       <FormControl fullWidth sx={{my: 1}} variant="outlined">
         <TextField label="Celular" {...register("phone")} />
-      </FormControl>
-      <FormControl fullWidth sx={{my: 1}} variant="outlined">
-        <TextField label="CPF" {...register("cpf")}/>
       </FormControl>
 
       <Button size="large" fullWidth sx={{my: 2}}

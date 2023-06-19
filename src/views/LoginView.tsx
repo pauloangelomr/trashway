@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import PasswordInput from "@components/inputs/PasswordInput";
 import {BaseHeader} from "@components/Header";
 import Link from "@components/Link";
@@ -59,6 +60,9 @@ export default function LoginView() {
           >
             Entrar
           </Button>
+          <Box>
+            <Link to="/recuperar-senha">Esqueci a senha</Link>
+          </Box>
           <Link to="/cadastro">Quero me cadastrar</Link>
         </Paper>
       </Container>

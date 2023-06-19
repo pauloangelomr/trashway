@@ -1,10 +1,12 @@
 export interface IUser {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   cpf?: string;
   cnpj?: string;
+  orders: any[];
 }
 
 export interface IAddress {

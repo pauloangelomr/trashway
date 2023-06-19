@@ -11,20 +11,21 @@ interface IProps {
 }
 
 export default function RegisterCustomerForm({onSubmit}: IProps) {
-  const {register, handleSubmit, formState: {errors}} = useForm<IRegisterCustomerFormData>({
+  const {register, handleSubmit} = useForm<IRegisterCustomerFormData>({
     resolver: zodResolver(registerCustomerFormSchema)
   });
 
-  console.log(errors);
-
-  const handleRegister = (formData: IRegisterCustomerFormData) => {
+  const handleRegister = async (formData: IRegisterCustomerFormData) => {
    onSubmit(formData);
   };
 
   return (
     <>
       <FormControl fullWidth sx={{my: 1}} variant="outlined">
-        <TextField label="Nome" {...register("name")} />
+        <TextField label="Nome" {...register("firstName")} />
+      </FormControl>
+      <FormControl fullWidth sx={{my: 1}} variant="outlined">
+        <TextField label="Sobrenome" {...register("lastName")} />
       </FormControl>
       <FormControl fullWidth sx={{my: 1}} variant="outlined">
         <TextField label="Email" {...register("email")}/>
